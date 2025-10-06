@@ -1,0 +1,208 @@
+@import "tailwindcss";
+
+
+@theme {
+    --color-border:hsl(var(--border));
+    --color-background: hsl(var(--background));
+    --color-foreground: hsl(var(--foreground));
+
+    --color-primary: hsl(var(--primary));
+    --color-primary-foreground: hsl(var(--primary-foreground));
+
+    --color-card: hsl(var(--card));
+
+    --animate-float: float 6s ease-in-out infinite;
+    --animate-pulse-subtle: pulse-subtle 4s ease-in-out infinite;
+    --animate-fade-in: fade-in 0.7s ease-out 0.2s forwards;
+    --animate-fade-in-delay-1: fade-in 0.7s ease-out 0.2s forwards;
+    --animate-fade-in-delay-2: fade-in 0.7s ease-out 0.4s forwards;
+    --animate-fade-in-delay-3: fade-in 0.7s ease-out 0.6s forwards;
+    --animate-fade-in-delay-4: fade-in 0.7s ease-out 0.8s forwards;
+    --animate-meteor: meteor 5s linear infinite; 
+
+    /* Flotación suave arriba-abajo FALTA ARREGLAR ESTO*/
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-12px);
+        }
+    }
+
+    /* Pulso sutil  */
+    @keyframes pulse-subtle {
+        0%, 100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 0.85;
+            transform: scale(1.02);
+        }   
+    }
+
+    /* Fade in (aparecer con leve movimiento hacia arriba) */
+    @keyframes fade-in {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Meteoro  */
+    @keyframes meteor {
+        0% {
+            transform: rotate(215deg) translateX(0);
+            opacity: 1;
+        }
+        70%{
+            opacity: 0.9;
+        }
+        100% {
+            transform: rotate(215deg) translateX(-500px) ;
+            opacity: 0;
+        }
+    }
+}
+
+    @layer base {
+        :root {
+            --background: 220 95% 95%;
+            --foreground: 222 30% 21%;
+
+            --border: 215 20% 65%;
+
+            --primary: 220 50% 55%;
+            --primary-foreground: 200 50% 100%;
+
+            --card: 0 0% 100%;
+        }
+
+        .dark {
+            --background: 222 20% 8%;
+            --foreground: 210 25% 97%;
+            --border: 220 25% 25%;
+            --primary: 250 60% 70%;
+            --primary-foreground: 200 50% 100%;
+            --card: 222 20% 12%;
+        }
+
+        *{
+            @apply border-border;
+        }
+
+        html {
+            @apply scroll-smooth;
+        }
+
+        body {
+            @apply bg-background text-foreground transition-colors duration-300;
+            font-feature-settings:"rlig" 1. "calt" 1;
+        }
+    }
+
+@utility container {
+    margin-inline: auto;
+    padding-inline: 2rem;
+    @media (width >= 640px) {
+    max-width: 640px;
+    }
+
+    @media (width >= 768px) {
+    max-width: 768px;
+    }
+
+    @media (width >= 1024px) {
+    max-width: 1024px;
+    }
+
+    @media (width >= 1280px) {
+    max-width: 1280px;
+    }
+
+    @media (width >= 1400px) {
+    max-width: 1400px;
+    }
+}
+
+@utility text-glow {
+    @apply relative;
+    text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+
+}
+
+@utility card-hover {
+    @apply transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg;
+
+}
+
+@utility gradient-border {
+    @apply relative rounded-md;
+    background: linear-gradient(to right, hsl(var(--card)), hsl(var(--primary)));
+    background-clip: padding-box;
+    border: 1px solid transparent;  
+}
+
+@utility cosmic-button {
+    @apply px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium 
+           transition-all duration-300 hover:shadow-[0_0_10px_rgba(167,139,250,0.5)]
+           hover:scale-105 active:scale-95;
+}
+
+@utility star {
+    @apply absolute rounded-full bg-white;
+    box-shadow: 0 0 10px rgba(255, 255, 250, 0.4);
+}
+
+@utility meteor {
+    @apply absolute bg-gradient-to-r from-white via-white to-transparent rounded-full;
+    box-shadow: 0 0 10px rgba(255, 255, 250, 0.4);
+}
+
+#root{
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+    text-align: center;
+}
+
+.skill-item .circle {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: conic-gradient(
+    hsl(var(--primary)) var(--percent, 30%), 
+    hsl(var(--background)) 0
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: bolder;
+  color: hsl(var(--foreground)); 
+  position: relative;
+}
+
+
+/* Texto en el centro */
+.skill-item .circle span {
+    position: absolute;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Carrusel - items */
+.carousel-item {
+    padding: 20px;
+}
+
+/* Animación hover */
+.skill-item .circle:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
