@@ -7,7 +7,7 @@ import Footer from './components/Footer'
 import Buscar from './components/Buscar'
 import AddBookModal from './components/AddBookModal'
 import FavoriteList from './components/FavoriteList'
-import libraryBg from "./assets/img/librerias.jpg";
+import libraryBg from "./assets/img/Librerias.jpg";
 import LocalStorageTest from "./components/LocalStorageTest";
 
 
